@@ -1,4 +1,5 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using ShopOnlie.Api.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+
+// Add connectionString
+var connectionString = builder.Configuration.GetConnectionString("ShopOnlineConnection");
+builder.Services.AddDbContext<ShopOnlineDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
 
 var app = builder.Build();
 

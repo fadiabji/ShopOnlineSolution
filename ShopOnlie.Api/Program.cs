@@ -11,9 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add connectionString
-builder.Services.AddDbContextPool<ShopOnlineDbContext>(options => 
-options.UseSqlServer(builder.Configuration.GetConnectionString("ShopOnlineConnection"))
-);
+var connectionString = builder.Configuration.GetConnectionString("ShopOnlineConnection");
+builder.Services.AddDbContext<ShopOnlineDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
