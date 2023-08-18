@@ -9,6 +9,8 @@ namespace ShopOnlie.Api.Data
         public ShopOnlineDbContext(DbContextOptions<ShopOnlineDbContext> options):base(options)
         {
         }
+
+        // This in order to create database from here, don't follow the DbSet method anymore
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

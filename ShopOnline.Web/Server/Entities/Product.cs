@@ -11,5 +11,9 @@
         public int CategoryId { get; set; }
 
 
+        public virtual ICollection<cartItem> CartItemsList  { get;}
+        public virtual ProductCategory Category { get; set; }
+        
+
     }
 }
