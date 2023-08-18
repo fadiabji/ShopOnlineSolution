@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopOnline.Web.Client", "Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopOnline.Web.Shared", "ShopOnline.Web\Shared\ShopOnline.Web.Shared.csproj", "{D4EE6F2C-271A-4294-A27C-7DD85B872FFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopOnlie.Api", "ShopOnlie.Api\ShopOnlie.Api.csproj", "{14F13A5A-9528-4396-B78A-E6B0BA717E31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopOnline.Api", "ShopOnlie.Api\ShopOnline.Api.csproj", "{14F13A5A-9528-4396-B78A-E6B0BA717E31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
