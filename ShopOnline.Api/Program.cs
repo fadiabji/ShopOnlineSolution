@@ -30,6 +30,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // when I start the web app the first time I get the Error tells that 
+// That because the Blazor component has differnet url from api.web component
 //Failed to load resource: the server responded with a status of 404 ()
 //Access to fetch at 'https://localhost:7106/api/Product' from origin 'https://localhost:7166' has been blocked by CORS policy:
 //No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs,
