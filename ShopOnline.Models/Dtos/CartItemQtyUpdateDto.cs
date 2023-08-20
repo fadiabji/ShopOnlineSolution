@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopOnline.Web.Shared.ClassesDtos
+namespace ShopOnline.Models.Dtos
 {
     public class CartItemQtyUpdateDto
     {

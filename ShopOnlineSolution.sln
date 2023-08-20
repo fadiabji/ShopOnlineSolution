@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopOnline.Web.Server", "ShopOnline.Web\Server\ShopOnline.Web.Server.csproj", "{B74203FA-47E2-43F1-A74C-5F3DED8223AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopOnline.Models", "ShopOnline.Models\ShopOnline.Models.csproj", "{3D3921AB-C18D-4D9B-B14F-191F7D3A45C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopOnline.Web.Client", "ShopOnline.Web\Client\ShopOnline.Web.Client.csproj", "{C64EAF11-2C33-4ADD-A2DE-7EC1D9B8AB45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopOnline.Api", "ShopOnline.Api\ShopOnline.Api.csproj", "{4FBC341D-E58A-4460-A92B-0E289CCEAAE8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopOnline.Web.Shared", "ShopOnline.Web\Shared\ShopOnline.Web.Shared.csproj", "{D4EE6F2C-271A-4294-A27C-7DD85B872FFB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopOnline.Web.Api", "ShopOnline.Web.Api\ShopOnline.Web.Api.csproj", "{1D7AB279-7825-426F-A552-E9460D8B84ED}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopOnline.Models", "ShopOnline.Models\ShopOnline.Models.csproj", "{3D3921AB-C18D-4D9B-B14F-191F7D3A45C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopOnline.Web", "ShopOnline.Web\ShopOnline.Web.csproj", "{7C4C8FF8-5747-4FC9-9EB4-02C9434C265A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,26 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B74203FA-47E2-43F1-A74C-5F3DED8223AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B74203FA-47E2-43F1-A74C-5F3DED8223AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B74203FA-47E2-43F1-A74C-5F3DED8223AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B74203FA-47E2-43F1-A74C-5F3DED8223AD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C64EAF11-2C33-4ADD-A2DE-7EC1D9B8AB45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C64EAF11-2C33-4ADD-A2DE-7EC1D9B8AB45}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C64EAF11-2C33-4ADD-A2DE-7EC1D9B8AB45}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C64EAF11-2C33-4ADD-A2DE-7EC1D9B8AB45}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D4EE6F2C-271A-4294-A27C-7DD85B872FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D4EE6F2C-271A-4294-A27C-7DD85B872FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D4EE6F2C-271A-4294-A27C-7DD85B872FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D4EE6F2C-271A-4294-A27C-7DD85B872FFB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D7AB279-7825-426F-A552-E9460D8B84ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D7AB279-7825-426F-A552-E9460D8B84ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D7AB279-7825-426F-A552-E9460D8B84ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D7AB279-7825-426F-A552-E9460D8B84ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3D3921AB-C18D-4D9B-B14F-191F7D3A45C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3D3921AB-C18D-4D9B-B14F-191F7D3A45C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D3921AB-C18D-4D9B-B14F-191F7D3A45C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D3921AB-C18D-4D9B-B14F-191F7D3A45C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FBC341D-E58A-4460-A92B-0E289CCEAAE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FBC341D-E58A-4460-A92B-0E289CCEAAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FBC341D-E58A-4460-A92B-0E289CCEAAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FBC341D-E58A-4460-A92B-0E289CCEAAE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C4C8FF8-5747-4FC9-9EB4-02C9434C265A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C4C8FF8-5747-4FC9-9EB4-02C9434C265A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C4C8FF8-5747-4FC9-9EB4-02C9434C265A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C4C8FF8-5747-4FC9-9EB4-02C9434C265A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
