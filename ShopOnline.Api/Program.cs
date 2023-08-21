@@ -19,6 +19,9 @@ builder.Services.AddDbContext<ShopOnlineDbContext>(options =>
 
 // Dependency injection
 builder.Services.AddScoped<IProductRepostiories, ProductRepostiories>();
+builder.Services.AddScoped<IShopingCartReopository, ShopingCartReopository>();
+
+
 
 var app = builder.Build();
 
