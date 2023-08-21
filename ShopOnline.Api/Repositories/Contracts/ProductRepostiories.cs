@@ -19,12 +19,12 @@ namespace ShopOnline.Api.Repositories.Contracts
 
         public async Task<ProductCategory> GetCateogy(int id)
         {
-            return await _db.ProductCategories.FirstOrDefaultAsync(c => c.Id == id);
+            return await _db.ProductCategories.SingleOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<Product> GetItem(int id)
         {
-            return await _db.Products.FirstOrDefaultAsync(p => p.Id == id);
+            return await _db.Products.FindAsync(id);
         }
 
         public async Task<IEnumerable<Product>> GetItems()

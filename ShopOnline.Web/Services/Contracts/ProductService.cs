@@ -12,16 +12,68 @@ namespace ShopOnline.Web.Services.Contracts
             _httpClient = httpClient;
         }
 
+        public async Task<ProductDto> GetItem(int id)
+        {
+            try
+            {
+                // I have to send the Id to the server in order to make the serach for this product
+                var response = await _httpClient.GetAsync($"api/Product/{id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    // if response come with no content
+                    if(response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        // empty object of ProductDto
+                        return default(ProductDto);
+                    }
+                   
+                    return await response.Content.ReadFromJsonAsync<ProductDto>();
+
+                }
+                else 
+                { 
+                    var message = await response.Content.ReadAsStringAsync();
+                    throw new Exception(message);
+                }
+            }
+            catch (Exception)
+            {
+                // log exception
+
+                throw;
+            }
+        }
+
         public async Task<IEnumerable<ProductDto>> GetItems()
         {
             try
             {
                 var products = await _httpClient.GetFromJsonAsync<IEnumerable<ProductDto>>("api/Product");
-                return products;
-            }
-            catch (Exception)
-            {
+                //return products;
+                var response = await _httpClient.GetAsync($"api/Product");
+                if (response.IsSuccessStatusCode)
+                {
+                    // if response come with no content
+                    if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        // empty object of ProductDto
+                        return Enumerable.Empty<ProductDto>();
+                    }
 
+                    return await response.Content.ReadFromJsonAsync<IEnumerable<ProductDto>>();
+
+                }
+                else
+                {
+                    var message = await response.Content.ReadAsStringAsync();
+                    throw new Exception(message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                // log exception
+                var message = ex.Message;                
                 throw;
             }
         }

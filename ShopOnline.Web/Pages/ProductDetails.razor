@@ -1,0 +1,34 @@
+﻿@page "/ProductDetails/{Id:int}"
+
+@inherits ProductDetailsBase
+
+@if(Product == null && ErrorMessage == null)
+{
+    <h3>Loading Product details...</h3>
+
+} 
+else if(ErrorMessage != null)
+{
+    <DisplayError ErrorMessage="@ErrorMessage"></DisplayError>
+}
+else
+{
+    <h3 class="mb-5"> Product Details</h3>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+                <img class="img-fluid" src="@Product.ImageURL"/>
+        </div>
+        <div class="col-md-6">
+            <h3>@Product.Name</h3>
+            <p>
+                <b>
+                    @Product.Price.ToString("C")&nbsp;(@Product.Qty items in stock);
+                </b>
+
+            </p>
+            <p>@Product.CategoryName</p>
+            <p class="mb-4">@Product.Description</p>
+        </div>
+
+    </div>
+}
