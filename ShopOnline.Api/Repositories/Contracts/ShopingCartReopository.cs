@@ -73,9 +73,15 @@ namespace ShopOnline.Api.Repositories.Contracts
                               CartId = cartItem.CartId
                           }).SingleOrDefaultAsync();
         }
-        public Task<CartItem> DeleteItem(int id)
+        public async Task<CartItem> DeleteItem(int id)
         {
-            throw new NotImplementedException();
+            var item = await _db.CartItems.FindAsync(id);
+            if(item != null)
+            {
+                _db.CartItems.Remove(item);
+                await _db.SaveChangesAsync();
+            }
+            return item;
         }
 
 

@@ -9,7 +9,7 @@ namespace ShopOnline.Web.Pages
         [Inject]
         public IShoppingCartService _ShoppingCartService { get; set; }
 
-        public IEnumerable<CartItemDto> ShoppingCartItems { get; set; }
+        public List<CartItemDto> ShoppingCartItems { get; set; }
 
         public string ErrorMessage { get; set; }
 
@@ -27,5 +27,25 @@ namespace ShopOnline.Web.Pages
             }
         }
 
+        protected async Task DeleteCartItem_Click(int id)
+        {
+            var cartItemDto = await _ShoppingCartService.DeleteItem(id);
+
+            // need to reflex to UI
+            // an solution for that we could remove it from the clinet side avoiding a trip to Server side 
+            // we make an seperate method to delete the item here
+
+            RemoveCartItem(id);
+        }
+
+        private CartItemDto GetCartItem(int id)
+        {
+            return ShoppingCartItems.FirstOrDefault(i => i.Id == id);
+        }
+        private void RemoveCartItem(int id)
+        {
+            var cartItemDto = GetCartItem(id);
+            ShoppingCartItems.Remove(cartItemDto);
+        }
     }
 }
