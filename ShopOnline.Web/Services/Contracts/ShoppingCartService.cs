@@ -23,7 +23,6 @@ namespace ShopOnline.Web.Services.Contracts
                         return default(CartItemDto);
                     }
                     return await respnse.Content.ReadFromJsonAsync<CartItemDto>();
-
                 }
                 else
                 {
@@ -33,25 +32,35 @@ namespace ShopOnline.Web.Services.Contracts
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
-        //public Task<IEnumerable<CartItemDto>> GetItems(int userId)
-        //{
-        //    try
-        //    {
-        //        var respnse = await _httpClient.GetAsync($"api/{userId}/GetItems");
-        //        if (respnse.IsSuccessStatusCode)
-        //        {
 
-        //        }
-        //    catch (Exception)
-        //    {
+        public async Task<IEnumerable<CartItemDto>> GetItems(int userId)
+        {
+            try
+            {
+                var respnse = await _httpClient.GetAsync($"api/ShoppingCart/{userId}/GetItems");
+                if (respnse.IsSuccessStatusCode)
+                {
+                    if (respnse.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        return Enumerable.Empty<CartItemDto>();
+                    }
+                    return await respnse.Content.ReadFromJsonAsync<IEnumerable<CartItemDto>>();
+                }
+                else
+                {
+                    var message = await respnse.Content.ReadAsStringAsync();
+                    throw new Exception($"Http status code: {respnse.StatusCode} message: {message}");
+                }
+            }
+            catch (Exception)
+            {
 
-        //        throw;
-        //    }
-        //}
+                throw;
+            }
+        }
     }
 }

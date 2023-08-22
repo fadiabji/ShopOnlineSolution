@@ -2,6 +2,7 @@
 using ShopOnlie.Api.Data;
 using ShopOnline.Api.Entities;
 using ShopOnline.Models.Dtos;
+using System.Text.Encodings.Web;
 
 namespace ShopOnline.Api.Repositories.Contracts
 {
@@ -16,8 +17,9 @@ namespace ShopOnline.Api.Repositories.Contracts
 
         private async Task<bool> CartItemsExist(int cartId, int productId)
         {
-            return await _db.CartItems.AnyAsync(c => c.CartId == cartId && 
+            var test = await _db.CartItems.AnyAsync(c => c.CartId == cartId &&
                                                 c.ProductId == productId);
+            return test ;
         }
         public async Task<CartItem> AddItem(CartItemToAddDto cartItemToAddDto)
         {
@@ -43,9 +45,10 @@ namespace ShopOnline.Api.Repositories.Contracts
 
         public async Task<IEnumerable<CartItem>> GetItems(int userId)
         {
-            return await (from cart in _db.Carts
+
+             var test = await (from cart in _db.Carts
                           join cartItem in _db.CartItems
-                          on cart.Id equals cartItem.Id
+                          on cart.Id equals cartItem.CartId
                           where cart.UserId == userId
                           select new CartItem
                           {
@@ -54,6 +57,7 @@ namespace ShopOnline.Api.Repositories.Contracts
                               Qty = cartItem.Qty,
                               CartId = cartItem.CartId,
                           }).ToListAsync();
+            return test;
         }
         public async Task<CartItem> GetItem(int id)
         {

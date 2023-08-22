@@ -9,7 +9,14 @@ namespace ShopOnline.Web.Pages
         [Parameter]
         public int Id { get; set; }
         [Inject]
-        public IProductService ProductService { get; set; }
+        public IProductService _ProductService { get; set; }
+
+        [Inject]
+        public IShoppingCartService _ShoppingCartService { get; set; }
+
+        //This service from runtime
+        [Inject]
+        public NavigationManager _NavigationManager { get; set; }
 
         public ProductDto Product { get; set; }
 
@@ -20,14 +27,26 @@ namespace ShopOnline.Web.Pages
         {
             try
             {
-                Product = await ProductService.GetItem(Id);
+                Product = await _ProductService.GetItem(Id);
             }
             catch (Exception ex)
             {
-
                 ErrorMessage = ex.Message;
             }
-            
+        }
+
+        protected async Task AddToCart_Click(CartItemToAddDto cartItemToAddDto)
+        {
+            try
+            {
+                var carItemDto = await _ShoppingCartService.AddItem(cartItemToAddDto);
+                _NavigationManager.NavigateTo("/ShoppingCart");
+            }
+            catch (Exception)
+            {
+
+               // log excetpion
+            }
         }
     }
 }

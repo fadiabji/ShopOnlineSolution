@@ -10,12 +10,12 @@ namespace ShopOnline.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ShopingCartController : ControllerBase
+    public class ShoppingCartController : ControllerBase
     {
         private readonly IShopingCartReopository _shopingCartReopository;
         private readonly IProductRepostiories _productRepostiories;
 
-        public ShopingCartController(IShopingCartReopository shopingCartReopository,
+        public ShoppingCartController(IShopingCartReopository shopingCartReopository,
                                     IProductRepostiories productRepostiories)
         {
             _shopingCartReopository = shopingCartReopository;
