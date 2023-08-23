@@ -2,6 +2,7 @@
 using Microsoft.JSInterop;
 using ShopOnline.Models.Dtos;
 using ShopOnline.Web.Services.Contracts;
+using System.Globalization;
 using System.Runtime.InteropServices;
 
 namespace ShopOnline.Web.Pages
@@ -27,7 +28,7 @@ namespace ShopOnline.Web.Pages
             {
                 ShoppingCartItems = await _ShoppingCartService.GetItems(HardCodded.UserId);
 
-                CalculateCartSummaryTotals();
+                CartChanged();
             }
             catch (Exception ex)
             {
@@ -45,7 +46,7 @@ namespace ShopOnline.Web.Pages
             // we make an seperate method to delete the item here
 
             RemoveCartItem(id);
-            CalculateCartSummaryTotals();
+            CartChanged();
         }
 
         protected async Task UpdateQtyCartItem_Click(int id, int qty)
@@ -62,7 +63,7 @@ namespace ShopOnline.Web.Pages
                     var returnedUpdateItemDto = await _ShoppingCartService.UpdateQty(updateItemDto);
 
                     UpdateItemTotalPrice(returnedUpdateItemDto);
-                    CalculateCartSummaryTotals();
+                    CartChanged();
                     // to hide the button after click update
                     await MakeUpdateQtyButtonVisible(id, false);
                 }
@@ -95,7 +96,7 @@ namespace ShopOnline.Web.Pages
 
         private void SetTotalPrice()
         {
-            TotalPrice = ShoppingCartItems.Sum(i => i.TotalPrice).ToString("C"); // C means Currency format
+            TotalPrice = ShoppingCartItems.Sum(i => i.TotalPrice).ToString("C", new CultureInfo("se-SE")); // C means Currency format
         }
 
         private void SetTotalQuantity()
@@ -129,7 +130,10 @@ namespace ShopOnline.Web.Pages
             }
         }
 
-
-
+        private void CartChanged()
+        {
+            CalculateCartSummaryTotals();
+            _ShoppingCartService.RaiseEventOnShoppingCartChanged(TotalQuantity);
+        }
     }
 }

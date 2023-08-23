@@ -1,4 +1,7 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@implements IDisposable
+@inject IShoppingCartService _shoppinCartService
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Shop Online</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -14,16 +17,17 @@
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
+        @*example about the class to hidding the element in the larg or small screens:
+        <div class=" d-none d-sm-block d-md-none">This is visible on small screens and hidden on larger screens.</div>
+        for  more info visit https://getbootstrap.com/docs/5.3/utilities/display/#hiding-elements*@
+        <div class="nav-item d-none d-sm-block d-md-none">
+            
+                <NavLink class="nav-link" href="ShoppingCart">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> &nbsp;Shopping Cart (<b>@shoppingCartItemCount</b>)
+                </NavLink>
+            
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
+        
     </nav>
 </div>
 
@@ -32,8 +36,29 @@
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
+    private int shoppingCartItemCount = 0;
+
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+
+    protected override void OnInitialized()
+    {
+        // this + means subscribe to an event
+        _shoppinCartService.OnShoppingCartChanged += ShoppingCartChanged;
+    }
+
+    protected void ShoppingCartChanged(int totalQty)
+    {
+        shoppingCartItemCount = totalQty;
+        StateHasChanged();
+    }
+
+    void IDisposable.Dispose()
+    {
+        // this - means unsubscribe to an event
+        _shoppinCartService.OnShoppingCartChanged -= ShoppingCartChanged;
     }
 }
