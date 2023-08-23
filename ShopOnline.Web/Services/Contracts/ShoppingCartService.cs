@@ -9,6 +9,9 @@ namespace ShopOnline.Web.Services.Contracts
     public class ShoppingCartService : IShoppingCartService
     {
         private readonly HttpClient _httpClient;
+        // this property to store the count of the cart appears on the top menu
+
+        public event Action<int> OnShoppingCartChanged;
 
         public ShoppingCartService(HttpClient httpClient) 
         {
@@ -82,7 +85,6 @@ namespace ShopOnline.Web.Services.Contracts
                 throw;
             }
         }
-
         public async Task<CartItemDto> UpdateQty(CartItemQtyUpdateDto cartItemQtyUpdateDto)
         {
             try
@@ -106,6 +108,14 @@ namespace ShopOnline.Web.Services.Contracts
             {
                 // log exception
                 throw;
+            }
+        }
+
+        public void RaiseEventOnShoppingCartChanged(int totalQty)
+        {
+           if(OnShoppingCartChanged != null)
+            {
+                OnShoppingCartChanged.Invoke(totalQty);
             }
         }
     }
