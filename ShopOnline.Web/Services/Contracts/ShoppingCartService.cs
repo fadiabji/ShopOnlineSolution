@@ -1,5 +1,8 @@
-﻿using ShopOnline.Models.Dtos;
+﻿using Newtonsoft.Json;
+using ShopOnline.Models.Dtos;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json.Serialization;
 
 namespace ShopOnline.Web.Services.Contracts
 {
@@ -60,7 +63,6 @@ namespace ShopOnline.Web.Services.Contracts
                 throw;
             }
         }
-
         public async Task<CartItemDto> DeleteItem(int id)
         {
             try
@@ -81,5 +83,30 @@ namespace ShopOnline.Web.Services.Contracts
             }
         }
 
+        public async Task<CartItemDto> UpdateQty(CartItemQtyUpdateDto cartItemQtyUpdateDto)
+        {
+            try
+            {
+                // here you have to install newton soft package 
+                var jsonRequest = JsonConvert.SerializeObject(cartItemQtyUpdateDto); 
+
+                // to send the data in a propriate format to the server as a string object
+                var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json-patch+json");
+
+                var response = await _httpClient.PatchAsync($"api/ShoppingCart/{cartItemQtyUpdateDto.CartItemId}", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<CartItemDto>();
+                }
+                return null;
+
+            }
+            catch (Exception)
+            {
+                // log exception
+                throw;
+            }
+        }
     }
 }
