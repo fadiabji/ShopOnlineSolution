@@ -11,10 +11,10 @@
         public int CategoryId { get; set; }
 
 
-        public virtual ICollection<CartItem> CartItemsList  { get;}
+        public virtual ICollection<CartItem> CartItemsList { get; }
         public virtual ProductCategory Category { get; set; }
 
-        
+
 
     }
 }

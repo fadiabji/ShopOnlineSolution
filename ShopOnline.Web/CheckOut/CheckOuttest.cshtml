@@ -1,0 +1,90 @@
+﻿@*@page
+@model ShopOnline.Web.CheckOut.CheckOutModel
+@{
+
+    
+}
+
+
+<!-- Replace "test" with your own sandbox Business account app client ID -->
+<script src="https://www.paypal.com/sdk/js?client-id=AUQ4gb9Qih2EGoSCMnXik1Tws1LMd3bBxaw0Al1dX3yfY2O03dRVPRv-WvOS0jmG9qE7JoJHj_ncjWBL&currency=USD"></script>
+
+<div class="p-5" style="background-color: #08618d;">
+
+    <div id="paypal-button-container"></div>
+    <div id="notification-container"></div>
+</div>
+
+
+<script>
+    let paypal-buttons = paypal.Buttons({
+        createOrder() {
+            return fetch("/CheckOut", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                //body: JSON.stringify({
+                //    cart: [
+                //        {
+                //            sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
+                //            quantity: "YOUR_PRODUCT_QUANTITY",
+                //        },
+                //    ]
+                //})
+            })
+                .then((response) => response.json())
+                .then((order) => order.id);
+        },
+        
+        onApprove(data) {
+            paypal_buttons.close();
+            // This function captures the funds from the transaction.
+            return fetch("/CheckOut", {
+                method: "POST",
+                body: JSON.stringify({
+                    orderID: data.orderID
+                })
+            })
+                .then((response) => response.json())
+                .then((details) => {
+                   if(details == "success"){
+                        document.getElementById("notification-container").innerHTML =
+                        '<div class="alert alert-success" role="alert">The order is created successfully!</div>';
+                   }else{
+                        document.getElementById("notification-container").innerHTML =
+                            '<div class="alert alert-danger" role="alert">Failed to create the order!</div>';
+
+                   }
+                });
+        },
+
+        onCancel(data) {
+            // Show a cancel page, or return to cart
+            document.getElementById("notification-container").innerHTML =
+                '<div class="alert alert-danger" role="alert">Order Canceled!</div>';
+            
+                
+            return fetch("/CheckOut", {
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    orderID: data.orderID
+                })
+
+            })
+
+        }
+
+
+        onError(err) {
+            // For example, redirect to a specific error page
+            document.getElementById("notification-container").innerHTML =
+                '<div class="alert alert-danger" role="alert">Failed to create the order!</div>';
+
+        }
+    });
+    paypal-buttons.render('#paypal-button-container');
+</script>*@

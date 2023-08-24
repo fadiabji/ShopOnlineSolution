@@ -2,7 +2,6 @@
 using ShopOnline.Models.Dtos;
 using System.Net.Http.Json;
 using System.Text;
-using System.Text.Json.Serialization;
 
 namespace ShopOnline.Web.Services.Contracts
 {
@@ -13,7 +12,7 @@ namespace ShopOnline.Web.Services.Contracts
 
         public event Action<int> OnShoppingCartChanged;
 
-        public ShoppingCartService(HttpClient httpClient) 
+        public ShoppingCartService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
@@ -90,7 +89,7 @@ namespace ShopOnline.Web.Services.Contracts
             try
             {
                 // here you have to install newton soft package 
-                var jsonRequest = JsonConvert.SerializeObject(cartItemQtyUpdateDto); 
+                var jsonRequest = JsonConvert.SerializeObject(cartItemQtyUpdateDto);
 
                 // to send the data in a propriate format to the server as a string object
                 var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json-patch+json");
@@ -113,7 +112,7 @@ namespace ShopOnline.Web.Services.Contracts
 
         public void RaiseEventOnShoppingCartChanged(int totalQty)
         {
-           if(OnShoppingCartChanged != null)
+            if (OnShoppingCartChanged != null)
             {
                 OnShoppingCartChanged.Invoke(totalQty);
             }

@@ -7,7 +7,7 @@
 
 
         public virtual User User { get; set; }
-        public virtual ICollection<CartItem> CartItemsList{ get; set; }
-        
+        public virtual ICollection<CartItem> CartItemsList { get; set; }
+
     }
 }

@@ -10,7 +10,7 @@ namespace ShopOnline.Web.Pages
         public IProductService _ProductService { get; set; }
 
         [Inject]
-        public IShoppingCartService _ShoppingCartService { get; set; }  
+        public IShoppingCartService _ShoppingCartService { get; set; }
 
         public IEnumerable<ProductDto> Products { get; set; }
 
@@ -49,6 +49,6 @@ namespace ShopOnline.Web.Pages
         }
 
 
-        
+
     }
 }
