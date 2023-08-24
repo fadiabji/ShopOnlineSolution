@@ -3,11 +3,10 @@ using Microsoft.JSInterop;
 using ShopOnline.Models.Dtos;
 using ShopOnline.Web.Services.Contracts;
 using System.Globalization;
-using System.Runtime.InteropServices;
 
 namespace ShopOnline.Web.Pages
 {
-    public class ShoppingCartBase:ComponentBase
+    public class ShoppingCartBase : ComponentBase
     {
         [Inject]
         public IShoppingCartService _ShoppingCartService { get; set; }
@@ -69,7 +68,7 @@ namespace ShopOnline.Web.Pages
                 }
                 else
                 {
-                    var item = ShoppingCartItems.FirstOrDefault(i  => i.Id == id);
+                    var item = ShoppingCartItems.FirstOrDefault(i => i.Id == id);
                     if (item != null)
                     {
                         item.Qty = 1;
@@ -124,7 +123,7 @@ namespace ShopOnline.Web.Pages
         private void UpdateItemTotalPrice(CartItemDto cartItemDto)
         {
             var item = GetCartItem(cartItemDto.Id);
-            if(item != null)
+            if (item != null)
             {
                 item.TotalPrice = cartItemDto.Price * cartItemDto.Qty;
             }

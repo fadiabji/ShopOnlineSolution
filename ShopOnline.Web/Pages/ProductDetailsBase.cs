@@ -45,7 +45,7 @@ namespace ShopOnline.Web.Pages
             catch (Exception)
             {
 
-               // log excetpion
+                // log excetpion
             }
         }
     }

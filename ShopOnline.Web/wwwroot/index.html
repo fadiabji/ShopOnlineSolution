@@ -23,6 +23,44 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+    <script src="https://www.paypal.com/sdk/js?client-id=AUQ4gb9Qih2EGoSCMnXik1Tws1LMd3bBxaw0Al1dX3yfY2O03dRVPRv-WvOS0jmG9qE7JoJHj_ncjWBL&currency=USD"></script>
+
+    <script>
+        window.initializePayPalButton = function () {
+            
+        let paypal_buttons = paypal.Buttons({
+            createOrder() {
+                
+                return fetch("/CheckOut?handler=CreateOrder", {
+                    method: "POST"
+                    //headers: {
+                    //    "Content-Type": "application/json",
+                    //},
+                    //body: JSON.stringify({
+                    //    cart: [
+                    //        {
+                    //            sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
+                    //            quantity: "2"
+                    //        }
+                    //    ]
+                    //})
+                }).then((response) => response.json())
+                  .then((order) => order.id);
+            },
+            onApprove(data) {
+                return fetch("/CheckOut?handler=CompleteOrder", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        orderID: data.orderID
+                    })
+                }).then((response) => response.json())
+                .then((details) => alert('Transaction completed by ' + details.payer.name.given_name));
+            }
+        });
+            paypal_buttons.render('#paypal-button-container');
+        }
+    </script>
+
     <script src="js/ShoppingCartFunctions.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
     <!--bootstrap 5.3-->

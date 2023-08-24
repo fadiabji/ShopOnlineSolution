@@ -7,14 +7,14 @@ namespace ShopOnline.Api.Repositories.Contracts
     public class ProductRepostiories : IProductRepostiories
     {
         private readonly ShopOnlineDbContext _db;
-        public ProductRepostiories( ShopOnlineDbContext db)
+        public ProductRepostiories(ShopOnlineDbContext db)
         {
             _db = db;
-            
+
         }
         public async Task<IEnumerable<ProductCategory>> GetCategories()
         {
-            return await _db.ProductCategories.ToListAsync(); 
+            return await _db.ProductCategories.ToListAsync();
         }
 
         public async Task<ProductCategory> GetCateogy(int id)

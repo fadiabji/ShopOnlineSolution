@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using ShopOnline.Api.Extentions;
 using ShopOnline.Api.Repositories.Contracts;
 using ShopOnline.Models.Dtos;
-using ShopOnline.Api.Extentions;
-using ShopOnline.Api.Entities;
 
 
 namespace ShopOnline.Api.Controllers
@@ -24,18 +22,18 @@ namespace ShopOnline.Api.Controllers
 
         [HttpGet]
         [Route("{userId}/GetItems")]
-        public async Task<ActionResult<IEnumerable<CartItemDto>>> GetItems(int userId) 
+        public async Task<ActionResult<IEnumerable<CartItemDto>>> GetItems(int userId)
         {
             try
             {
                 var cartItems = await _shopingCartReopository.GetItems(userId);
-                if(cartItems == null)
+                if (cartItems == null)
                 {
                     return NoContent();
                 }
                 var products = await _productRepostiories.GetItems();
                 // Throw an exception to web component that no products in the database
-                if(products == null)
+                if (products == null)
                 {
                     throw new Exception("No products exist in the system");
                 }
@@ -46,7 +44,7 @@ namespace ShopOnline.Api.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
-            
+
         }
 
         [HttpGet("{id:int}")]
@@ -55,12 +53,12 @@ namespace ShopOnline.Api.Controllers
             try
             {
                 var cartItem = await _shopingCartReopository.GetItem(id);
-                if(cartItem == null)
+                if (cartItem == null)
                 {
                     return NotFound();
                 }
                 var product = await _productRepostiories.GetItem(cartItem.ProductId);
-                if(product == null)
+                if (product == null)
                 {
                     throw new Exception("No proudct exit in the system");
                 }
@@ -79,7 +77,7 @@ namespace ShopOnline.Api.Controllers
             try
             {
                 var newCartItem = await _shopingCartReopository.AddItem(cartItemToAddDto);
-                if(newCartItem == null)
+                if (newCartItem == null)
                 {
                     return NotFound();
                 }
@@ -106,12 +104,12 @@ namespace ShopOnline.Api.Controllers
             try
             {
                 var cartItem = await _shopingCartReopository.DeleteItem(id);
-                if(cartItem == null)
+                if (cartItem == null)
                 {
                     return NotFound();  // response 404 not found
                 }
                 var porouct = await _productRepostiories.GetItem(cartItem.ProductId);
-                if(porouct == null)
+                if (porouct == null)
                 {
                     return NotFound();
                 }
@@ -135,17 +133,17 @@ namespace ShopOnline.Api.Controllers
             try
             {
                 var cartItem = await _shopingCartReopository.UpdateQty(id, cartItemQtyUpdateDto);
-                if(cartItem == null)
+                if (cartItem == null)
                 {
                     return NotFound();
                 }
                 var product = await _productRepostiories.GetItem(cartItem.ProductId);
-                if(product == null)
+                if (product == null)
                 {
                     return NotFound();
                 }
 
-                var cartItemDto = cartItem.ConvertToDto(product); 
+                var cartItemDto = cartItem.ConvertToDto(product);
 
                 return Ok(cartItemDto); // 200 result Ok
             }

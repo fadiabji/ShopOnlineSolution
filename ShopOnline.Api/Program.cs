@@ -38,7 +38,7 @@ if (app.Environment.IsDevelopment())
 //Access to fetch at 'https://localhost:7106/api/Product' from origin 'https://localhost:7166' has been blocked by CORS policy:
 //No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs,
 //set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
-app.UseCors( police => police.WithOrigins("https://localhost:7166", "https://localhost:7166")
+app.UseCors(police => police.WithOrigins("https://localhost:7166", "https://localhost:7166")
                                 .AllowAnyMethod()
                                 .WithHeaders(HeaderNames.ContentType)
 

@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using ShopOnline.Api.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
 using ShopOnline.Api.Extentions;
-using ShopOnline.Models.Dtos;
 using ShopOnline.Api.Repositories.Contracts;
+using ShopOnline.Models.Dtos;
 
 namespace ShopOnline.Api.Controllers
 {

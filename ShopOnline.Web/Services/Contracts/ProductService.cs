@@ -1,5 +1,4 @@
-﻿using ShopOnline.Web.Services.Contracts;
-using ShopOnline.Models.Dtos;
+﻿using ShopOnline.Models.Dtos;
 using System.Net.Http.Json;
 
 namespace ShopOnline.Web.Services.Contracts
@@ -7,7 +6,7 @@ namespace ShopOnline.Web.Services.Contracts
     public class ProductService : IProductService
     {
         private readonly HttpClient _httpClient;
-        public ProductService( HttpClient httpClient)
+        public ProductService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
@@ -21,17 +20,17 @@ namespace ShopOnline.Web.Services.Contracts
                 if (response.IsSuccessStatusCode)
                 {
                     // if response come with no content
-                    if(response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
                         // empty object of ProductDto
                         return default(ProductDto);
                     }
-                   
+
                     return await response.Content.ReadFromJsonAsync<ProductDto>();
 
                 }
-                else 
-                { 
+                else
+                {
                     var message = await response.Content.ReadAsStringAsync();
                     throw new Exception(message);
                 }
@@ -73,7 +72,7 @@ namespace ShopOnline.Web.Services.Contracts
             catch (Exception ex)
             {
                 // log exception
-                var message = ex.Message;                
+                var message = ex.Message;
                 throw;
             }
         }
