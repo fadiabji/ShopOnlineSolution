@@ -27,10 +27,8 @@
 
     <script>
         window.initializePayPalButton = function () {
-            
         let paypal_buttons = paypal.Buttons({
             createOrder() {
-                
                 return fetch("/CheckOut?handler=CreateOrder", {
                     method: "POST"
                     //headers: {
@@ -39,8 +37,8 @@
                     //body: JSON.stringify({
                     //    cart: [
                     //        {
-                    //            sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
-                    //            quantity: "2"
+                    //            sku: "test",
+                    //            quantity: "100"
                     //        }
                     //    ]
                     //})
