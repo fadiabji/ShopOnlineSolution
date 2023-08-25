@@ -19,12 +19,17 @@ namespace ShopOnline.Web.Pages
 
         [Inject]
         public IShoppingCartService _shoppingCartService { get; set; }
+
+        [Inject] 
+        private HttpClient _HttpClient { get; set; }
         protected IEnumerable<CartItemDto> ShoppingCartItems { get; set; }
 
         protected int TotalQty { get; set; }
 
         protected string PaymentDescription { get; set; }   
         protected decimal PaymentAmount{ get; set; }
+
+        // to be able see all integrated method in this class type override then spase and scroll over them
 
         protected override async Task OnInitializedAsync()
         {
@@ -63,7 +68,9 @@ namespace ShopOnline.Web.Pages
             }
         }
 
-  
+       
+
+       
 
         [JSInvokable]
         public JsonResult CreateOrder()
@@ -74,7 +81,7 @@ namespace ShopOnline.Web.Pages
 
             if(TotalQty == 0 || PaymentAmount == 0 || PaymentDescription == "")
             {
-                return new JsonResult("");
+                return  new JsonResult("");
             }
 
             // create the request body like this:
@@ -139,12 +146,10 @@ namespace ShopOnline.Web.Pages
                     if (jsonResponse != null)
                     {
                         accessToken = jsonResponse["id"]?.ToString() ?? "";
-
                         // save the order in the database
                     }
                 }
             }
-
            var response = new
            {
                  Id = orderId
@@ -156,10 +161,8 @@ namespace ShopOnline.Web.Pages
         [JSInvokable]
         public JsonResult CompleteOrder([FromBody] JsonObject data)
         {
-
             if (data == null || data["orderID"] == null) return new JsonResult("");
             var orderID = data["orderID"]!.ToString();
-
             return new JsonResult("");
         }
         
@@ -167,10 +170,8 @@ namespace ShopOnline.Web.Pages
         [JSInvokable]
         public JsonResult CancelOrder([FromBody] JsonObject data)
         {
-
             if (data == null || data["orderID"] == null) return new JsonResult("");
             var orderID = data["orderID"]!.ToString();
-
             return new JsonResult("");
         }
 
@@ -210,7 +211,6 @@ namespace ShopOnline.Web.Pages
                     }
                 }
             }
-
             return accessToken;
         }
 
