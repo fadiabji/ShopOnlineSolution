@@ -9,6 +9,8 @@ namespace ShopOnline.Api.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+
+        
         private readonly IProductRepostiories _productRepositiories;
         public ProductController(IProductRepostiories productRepostiories)
         {
@@ -67,6 +69,24 @@ namespace ShopOnline.Api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route(nameof(GetProductCategories))]
+        public async Task<ActionResult<IEnumerable<ProductCategoryDto>>> GetProductCategories()
+        {
+            try
+            {
+                var productCategories = await _productRepositiories.GetCategories();
+                var productCategorieyDtos = productCategories.ConvertToDto();
+
+                return Ok(productCategorieyDtos);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
+            }
+
+        }
 
 
 
