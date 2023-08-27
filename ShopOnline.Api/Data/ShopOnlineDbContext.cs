@@ -291,22 +291,26 @@ namespace ShopOnlie.Api.Data
             modelBuilder.Entity<ProductCategory>().HasData(new ProductCategory
             {
                 Id = 1,
-                Name = "Beauty"
+                Name = "Beauty",
+                IconCss = "fas fa-spa"
             });
             modelBuilder.Entity<ProductCategory>().HasData(new ProductCategory
             {
                 Id = 2,
-                Name = "Furniture"
+                Name = "Furniture",
+                IconCss = "fas fa-couch"
             });
             modelBuilder.Entity<ProductCategory>().HasData(new ProductCategory
             {
                 Id = 3,
-                Name = "Electronics"
+                Name = "Electronics",
+                IconCss = "fas fa-headphones"
             });
             modelBuilder.Entity<ProductCategory>().HasData(new ProductCategory
             {
                 Id = 4,
-                Name = "Shoes"
+                Name = "Shoes",
+                IconCss = "fas fa-shoe-prints"
             });
         }
 
