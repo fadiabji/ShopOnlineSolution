@@ -19,11 +19,9 @@ namespace ShopOnline.Api.Extentions
                     }
                     ).ToList();
         }
-        public static IEnumerable<ProductDto> ConvertToDto(this IEnumerable<Product> products, IEnumerable<ProductCategory> productCategories)
+        public static IEnumerable<ProductDto> ConvertToDto(this IEnumerable<Product> products)
         {
             return from product in products
-                   join productCategory in productCategories
-                   on product.CategoryId equals productCategory.Id
                    select new ProductDto
                    {
                        Id = product.Id,
@@ -32,14 +30,14 @@ namespace ShopOnline.Api.Extentions
                        Description = product.Description,
                        Price = product.Price,
                        Qty = product.Qty,
-                       CategroyId = product.CategoryId,
-                       CategoryName = productCategory.Name
+                       CategroyId = product.ProductCategory.Id,
+                       CategoryName = product.ProductCategory.Name
                    };
         }
 
 
 
-        public static ProductDto ConvertToDto(this Product product, ProductCategory productCategory)
+        public static ProductDto ConvertToDto(this Product product)
         {
             return new ProductDto
             {
@@ -49,8 +47,8 @@ namespace ShopOnline.Api.Extentions
                 Description = product.Description,
                 Price = product.Price,
                 Qty = product.Qty,
-                CategroyId = product.CategoryId,
-                CategoryName = productCategory.Name
+                CategroyId = product.ProductCategory.Id,
+                CategoryName = product.ProductCategory.Name
             };
         }
 

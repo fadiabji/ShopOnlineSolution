@@ -23,16 +23,13 @@ namespace ShopOnline.Api.Controllers
             try
             {
                 var products = await _productRepositiories.GetItems();// Get all products in database
-                var productCategories = await _productRepositiories.GetCategories();
-                // make this instade of calling database two times which is not properate
-                //var products = await _productRepositiories.GetItems();
-                if (products == null || productCategories == null)
+                if (products == null )
                 {
                     return NotFound();
                 }
                 else
                 {
-                    var productDtos = products.ConvertToDto(productCategories);
+                    var productDtos = products.ConvertToDto();
                     return Ok(productDtos);
                 }
             }
@@ -57,8 +54,7 @@ namespace ShopOnline.Api.Controllers
                 }
                 else
                 {
-                    var prodcutCategory = await _productRepositiories.GetCateogy(product.CategoryId);
-                    var productDto = product.ConvertToDto(prodcutCategory);
+                    var productDto = product.ConvertToDto();
 
                     return Ok(productDto);
                 }
@@ -95,8 +91,7 @@ namespace ShopOnline.Api.Controllers
             try
             {
                 var products = await _productRepositiories.GetItemByCategory(categoryId);
-                var productCategories = await _productRepositiories.GetCategories();
-                var productDtos = products.ConvertToDto(productCategories);
+                var productDtos = products.ConvertToDto();
                 return Ok(productDtos);
             }
             catch (Exception)

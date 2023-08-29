@@ -8,12 +8,16 @@ namespace ShopOnline.Web.Pages
 {
     public class ShoppingCartBase : ComponentBase
     {
-        [Inject]
-        public IShoppingCartService _ShoppingCartService { get; set; }
-
         // To be able to call javascript functions
         [Inject]
         public IJSRuntime JS { get; set; }
+        [Inject]
+        public IShoppingCartService _ShoppingCartService { get; set; }
+
+        [Inject]
+        public IManageCartItemsLocalStorageService _ManageCartItemsLocalStorageService { get; set; }
+
+
         public List<CartItemDto> ShoppingCartItems { get; set; }
 
         public string ErrorMessage { get; set; }
@@ -25,7 +29,7 @@ namespace ShopOnline.Web.Pages
         {
             try
             {
-                ShoppingCartItems = await _ShoppingCartService.GetItems(HardCodded.UserId);
+                ShoppingCartItems = await _ManageCartItemsLocalStorageService.GetCollection();
 
                 CartChanged();
             }
@@ -114,19 +118,23 @@ namespace ShopOnline.Web.Pages
             return ShoppingCartItems.FirstOrDefault(i => i.Id == id);
         }
 
-        private void RemoveCartItem(int id)
+        private async void RemoveCartItem(int id)
         {
             var cartItemDto = GetCartItem(id);
             ShoppingCartItems.Remove(cartItemDto);
+
+            await _ManageCartItemsLocalStorageService.SaveCollection(ShoppingCartItems);
         }
 
-        private void UpdateItemTotalPrice(CartItemDto cartItemDto)
+        private async void UpdateItemTotalPrice(CartItemDto cartItemDto)
         {
             var item = GetCartItem(cartItemDto.Id);
             if (item != null)
             {
                 item.TotalPrice = cartItemDto.Price * cartItemDto.Qty;
             }
+
+            await _ManageCartItemsLocalStorageService.SaveCollection(ShoppingCartItems);
         }
 
         private void CartChanged()
