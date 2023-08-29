@@ -22,6 +22,10 @@ namespace ShopOnline.Web.Pages
 
         [Inject] 
         private HttpClient _HttpClient { get; set; }
+
+        [Inject]
+        public IManageCartItemsLocalStorageService _ManageCartItemsLocalStorageService { get; set; }
+
         protected IEnumerable<CartItemDto> ShoppingCartItems { get; set; }
 
         protected int TotalQty { get; set; }
@@ -35,7 +39,7 @@ namespace ShopOnline.Web.Pages
         {
             try
             {
-                ShoppingCartItems = await _shoppingCartService.GetItems(HardCodded.UserId);
+                ShoppingCartItems = await _ManageCartItemsLocalStorageService.GetCollection();
                 if(ShoppingCartItems != null)
                 {
                     Guid orderGuid = Guid.NewGuid();
