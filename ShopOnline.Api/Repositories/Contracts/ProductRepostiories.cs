@@ -27,11 +27,20 @@ namespace ShopOnline.Api.Repositories.Contracts
             return await _db.Products.FindAsync(id);
         }
 
+
         public async Task<IEnumerable<Product>> GetItems()
         {
             //return await _db.Products.ToListAsync();
             return await _db.Products.Include(p => p.Category).ToListAsync();
 
+        }
+        public async Task<IEnumerable<Product>> GetItemByCategory(int id)
+        {
+            var products = await (from product in _db.Products
+                                  where product.CategoryId == id
+                                  select product
+                                  ).ToListAsync();
+            return products;
         }
     }
 }

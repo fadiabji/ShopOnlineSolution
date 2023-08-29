@@ -9,14 +9,14 @@ else if(ErrorMessage != null)
 {
     <DisplayError ErrorMessage="@ErrorMessage"/>
 }
-else{
+else
+{
     @foreach(var productCategory in ProductCategoryDtos)
     {
-
-        var link = "/ProductByCategory/" + productCategory.Id;
-        <div class="nav-item">
+        var link = "/ProductsByCategory/" + productCategory.Id;
+        <div class="nav-item d-block">
             <NavLink class="nav-link" href="@link" >
-                <span class="@productCategory.IconCss" aria-hidden="true"></span>&nbsp;@productCategory.Name
+                <span class="@productCategory.IconCss"></span>&nbsp;@productCategory.Name
             </NavLink>
         </div>
     }

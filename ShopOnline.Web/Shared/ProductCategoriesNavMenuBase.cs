@@ -18,8 +18,6 @@ namespace ShopOnline.Web.Shared
             try
             {
                 ProductCategoryDtos = await _ProductService.GetProductCategories();
-
-
             }
             catch (Exception ex)
             {

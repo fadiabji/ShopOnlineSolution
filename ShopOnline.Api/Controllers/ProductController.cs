@@ -10,7 +10,7 @@ namespace ShopOnline.Api.Controllers
     public class ProductController : ControllerBase
     {
 
-        
+
         private readonly IProductRepostiories _productRepositiories;
         public ProductController(IProductRepostiories productRepostiories)
         {
@@ -88,6 +88,23 @@ namespace ShopOnline.Api.Controllers
 
         }
 
+        [HttpGet]
+        [Route("{categoryId}/GetItemsByCategory")]
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetItemsByCategory(int categoryId)
+        {
+            try
+            {
+                var products = await _productRepositiories.GetItemByCategory(categoryId);
+                var productCategories = await _productRepositiories.GetCategories();
+                var productDtos = products.ConvertToDto(productCategories);
+                return Ok(productDtos);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
 
     }

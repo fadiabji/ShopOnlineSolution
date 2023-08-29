@@ -9,5 +9,6 @@ namespace ShopOnline.Api.Repositories.Contracts
         Task<Product> GetItem(int id);
         Task<ProductCategory> GetCateogy(int id);
 
+        Task<IEnumerable<Product>> GetItemByCategory(int id);
     }
 }
