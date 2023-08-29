@@ -1,4 +1,5 @@
-﻿@inherits DisplayProductsBase
+﻿@using System.Globalization;
+@inherits DisplayProductsBase
 
 @foreach (var item in Products)
 {
@@ -11,7 +12,7 @@
                         @item.Name
                     </h5>
                     <p class="card-text">
-                        <b>@item.Price.ToString("C")</b>
+                        <b>@item.Price.ToString("C",new CultureInfo("se-SE"))</b>
                     </p>
                 </div>
             </div>
