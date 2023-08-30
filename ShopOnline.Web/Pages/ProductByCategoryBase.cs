@@ -57,7 +57,7 @@ namespace ShopOnline.Web.Pages
             var productCollection = await _ManageProductsLocalStorageService.GetCollection();
             if(productCollection != null)
             {
-                return productCollection.Where(p => p.Id == categoryId);
+                return productCollection.Where(p => p.CategroyId == categoryId);
             }
             else
             {
